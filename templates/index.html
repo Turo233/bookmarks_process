@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SortableJS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/css/theme.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="/static/js/Sourtable.min.js"></script>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta property="og:image" content="/st/og-image.png" />
+    <meta name="keywords"
+        content="sortable, reorder, list, javascript, html5, drag and drop, dnd, animation, groups, dnd, sortableJS" />
+    <meta name="description"
+        content="Sortable — is a JavaScript library for reorderable drag-and-drop lists on modern browsers and touch devices. No jQuery required. Supports Meteor, AngularJS, React, Polymer, Vue, Knockout and any CSS library, e.g. Bootstrap." />
+    <meta name="viewport" content="width=device-width, initial-scale=0.5" />
+</head>
+
+<body>
+    <div class="container">
+        <div id="nested" class="row">
+            <h4 class="col-12">Nested Sortables Example</h4>
+            <p class="col-12">NOTE: When using nested Sortables with animation, it is recommended that the
+                <code>fallbackOnBody</code> option is set to true. <br />It is also always recommended that either the
+                <code>invertSwap</code> option is set to true, or the <code>swapThreshold</code> option is lower than
+                the
+                default value of 1 (eg <code>0.65</code>).</p>
+            <div id="nestedDemo" class="list-group col-6 nested-sortable">
+                {% for i, (key, val) in enumerate(bookmarks.items()) %}
+                <div class="list-group-item nested-1 ">
+                    {% if isinstance(val, dict) %}
+                    <h4 class="panel-title title_a"><a data-toggle="collapse" data-parent=""
+                            href=".collapse_0{{i}}">{{key}}</a></h4>
+                    <div class="list-group nested-sortable panel-collapse collapse collapse_0{{i}}">
+                        {% for i_1, (key_1, val_1) in enumerate(val.items()) %}
+                        <div class="list-group-item nested-2">
+                            {% if isinstance(val_1, dict) %}
+                            <h4 class="panel-title title_b"><a data-toggle="collapse" data-parent=""
+                                    href=".collapse_1{{i_1}}">{{key_1}}</a></h4>
+                            <div class="list-group nested-sortable panel-collapse collapse collapse_1{{i_1}}">
+                                {% for i_2, (key_2, val_2) in enumerate(val_1.items()) %}
+                                <div class="list-group-item nested-3">
+                                    {% if isinstance(val_2, dict) %}
+                                    <h4 class="panel-title title_c"><a data-toggle="collapse" data-parent=""
+                                            href=".collapse_2{{i_2}}">{{key_2}}</a></h4>
+                                    <div class="list-group nested-sortable panel-collapse collapse collapse_2{{i_2}}">
+                                        {% for i_3, (key_3, val_3) in enumerate(val_2.items()) %}
+                                        <div class="list-group-item nested-4">
+                                            {% if isinstance(val_3, dict) %}
+                                            <h4 class="panel-title title_4"><a data-toggle="collapse" data-parent="" href=".collapse_3{{i_3}}">{{key_3}}</a></h4>
+                                            <div class="list-group nested-sortable panel-collapse collapse collapse_3{{i_3}}">
+                                                {% for key_4, val_4 in val_3.items() %}
+                                                <div class="list-group-item nested-5">{{ key_4 }}</div>
+                                                {% end %}
+                                            </div>
+                                            {% else %}
+                                            <h4>{{key_3}}</h4>
+                                            {% end %}
+                                        </div>
+                                        {% end %}
+                                    {% else %}
+                                    <h4>{{key_2}}</h4>
+                                    {% end %}
+                                    </div>
+                                </div>
+                                {% end %}
+                            </div>
+                            {% else %}
+                            {{key_1}}
+                            {% end %}
+                        </div>
+                        {% end %}
+                    </div>
+                    {% else %}
+                    <h5>{{key}}</h5>
+                    {% end %}
+                </div>
+                {% end %}
+            </div>
+            <div id="nestedDemo_2" class="list-group col-6 nested-sortable">
+                <div class="list-group-item nested-1">Item 1.1
+                    <div class="list-group nested-sortable">
+                        <div class="list-group-item nested-2">Item 2.1</div>
+                        <div class="list-group-item nested-2">Item 2.2
+                            <div class="list-group nested-sortable">
+                                <div class="list-group-item nested-3">Item 3.1</div>
+                                <div class="list-group-item nested-3">Item 3.2</div>
+                                <div class="list-group-item nested-3">Item 3.3</div>
+                                <div class="list-group-item nested-3">Item 3.4</div>
+                            </div>
+                        </div>
+                        <div class="list-group-item nested-2">Item 2.3</div>
+                        <div class="list-group-item nested-2">Item 2.4</div>
+                    </div>
+                </div>
+                <div class="list-group-item nested-1">Item 1.2</div>
+                <div class="list-group-item nested-1">Item 1.3</div>
+                <div class="list-group-item nested-1">Item 1.4
+                    <div class="list-group nested-sortable">
+                        <div class="list-group-item nested-2">Item 2.1</div>
+                        <div class="list-group-item nested-2">Item 2.2</div>
+                        <div class="list-group-item nested-2">Item 2.3</div>
+                        <div class="list-group-item nested-2">Item 2.4</div>
+                    </div>
+                </div>
+                <div class="list-group-item nested-1">Item 1.5</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var nestedSortables = [].slice.call(document.querySelectorAll('.nested-sortable'));
+
+        // Loop through each nested sortable element
+        for (var i = 0; i < nestedSortables.length; i++) {
+            new Sortable(nestedSortables[i], {
+                group: 'nested',
+                animation: 150,
+                fallbackOnBody: true,
+                swapThreshold: 0.65
+            });
+        }
+    </script>
+</body>
